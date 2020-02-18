@@ -1,65 +1,25 @@
 # QuixOrder
 Senior Project CECS491AB Restaurant Menu App
 
-## Steps to start server
+## Steps to start project
+### PostgreSQL Database
+1. Download PostgreSQL. Comes with pgAdmin 4. You will need to enter and save your admin password and port (default: 5432) to access it. <br/> 
+    https://www.postgresql.org/download/
+2. Start pgAdmin 4. This will start in your browser.
+3. Navigate to Servers>PostgreSQL>Databases. Right click on Databases, and create new database **quixorder**.
 
-### Database
-This only needs to be done once.
-1. Open cmd
-2. Create docker container <br/>
-    **Note: {username} and {password} are placeholders. Enter your own without the { }**
-    ```
-    docker run --name {username} -e POSTGRES_PASSWORD={password} -d -p 5432:5432 postgres:alpine
-    ```
-3. Create file application.yml under src/main/resources
+### Open the project
+1. Use your preferred IDE to open the maven file QuixOrder/demo/pom.xml
+2. Navigate to demo/src/main/resources. Right click on resources, and create a new file **application.yml** <br/>
+    **Note: {password} is a placeholder. Enter your own without the { }**
+    ####**`application.yml`**
     ```yaml
     app:
       datasource:
         jdbc-url: jdbc:postgresql://localhost:5432/quixorder
-        username: <username>
-        password: <password>
+        username: postgres
+        password: {password}
         pool-size: 30
     ```
-4. Format container to be readable
-    ```
-    docker ps
-    ```
-    Result:
-    ```
-    CONTAINER ID        IMAGE               COMMAND                 ....
-    149472d2157c        postgres:alpine     "docker-entrypoint.s…"  ....
-    ```
-5. Create database using `CONTAINER ID`
-    ```
-    docker exec -it 149472d2157c bin/bash
-    psql -U postgres
-    CREATE DATABASE quixorder;
-    ```
-6. Connect to quixorder database
-    ```
-    \c quixorder
-    ```
-7. Start Application
-8. In cmd quixorder database
-    ```
-    \d tablename
-    \dt
-    ```
-    Confirm that schema is correctly reflected.
-9. Useful commands <br/>
-   ```
-   From postgres=#
-    - View all database
-        \l or \list
-    - View a database
-        \c databasename
-    - Return to bash
-        \q
-    - Terminate all connections to a database
-        SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE pid <> pg_backend_pid() AND datname = 'databasename';
-   From database=#
-    - View schema 
-        \dt
-    - View info about a table
-        \d tablename
-   ```
+3. Start the application `DemoApplication.java`
+4. The quixorder database in pgAdmin 4 should now be updated with tables defined in the sql files in resources/db/migration.

@@ -40,6 +40,10 @@ public class AccountService {
         return accountDao.selectAccountById(id);
     }
 
+    public Optional<Account> getAccountByUsername(String username) {
+        return accountDao.selectAccountByUsername(username);
+    }
+
     public int deleteAccount(UUID id) {
         return accountDao.deleteAccountById(id);
     }

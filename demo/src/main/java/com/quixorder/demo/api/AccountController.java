@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -39,9 +40,15 @@ public class AccountController {
         return accountService.getAllAccount();
     }
 
-    @GetMapping(path = "{id}")
+    @GetMapping(path = "/id/{id}")
     public Account getAccountById(@PathVariable("id") UUID id) {
         return accountService.getAccountById(id)
+                .orElse(null);
+    }
+
+    @GetMapping(path="/username/{username}")
+    public Account getAccountByUsername(@PathVariable("username") String username) {
+        return accountService.getAccountByUsername(username)
                 .orElse(null);
     }
 

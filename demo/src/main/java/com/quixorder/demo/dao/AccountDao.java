@@ -20,6 +20,7 @@ public interface AccountDao {
     List<Account> selectAllAccount();
 
     Optional<Account> selectAccountById(UUID id);
+    Optional<Account> selectAccountByUsername(String username);
     int deleteAccountById(UUID id);
     int updateAccountById(UUID id, Account account);
 }

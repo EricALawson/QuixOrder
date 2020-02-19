@@ -54,15 +54,33 @@ public class PostgresAccountDao implements AccountDao{
     }
 
     /**
-     * The function selectAccountById() searches for an account and returns it
-     * @param id This is the primary key for account that is being searched for
+     * The function selectAccountById() searches for an account ID and returns it
+     * @param accountId This is the primary key for account that is being searched for
      * @return the entry whose ID matches
      */
     @Override
-    public Optional<Account> selectAccountById(UUID id) {
+    public Optional<Account> selectAccountById(UUID accountId) {
         final String sql = "SELECT * FROM account WHERE id = ?";
-        Account account = jdbcTemplate.queryForObject(sql, new Object[]{id}, (resultSet, i) -> {
-            UUID accountId = UUID.fromString(resultSet.getString("id"));
+        Account account = jdbcTemplate.queryForObject(sql, new Object[]{accountId}, (resultSet, i) -> {
+            UUID id = UUID.fromString(resultSet.getString("id"));
+            String type = resultSet.getString("type");
+            String username = resultSet.getString("username");
+            String password = resultSet.getString("password");
+            return new Account(id, type, username, password);
+        });
+        return Optional.ofNullable(account);
+    }
+
+    /**
+     * The function selectAccountByUsername() searches for an account by Username and returns it
+     * @param accountUsername This is the username for account that is being searched for
+     * @return the entry whose Username matches
+     */
+    @Override
+    public Optional<Account> selectAccountByUsername(String accountUsername) {
+        final String sql = "SELECT * FROM account WHERE username = ?";
+        Account account = jdbcTemplate.queryForObject(sql, new Object[]{accountUsername}, (resultSet, i) -> {
+            UUID id = UUID.fromString(resultSet.getString("id"));
             String type = resultSet.getString("type");
             String username = resultSet.getString("username");
             String password = resultSet.getString("password");

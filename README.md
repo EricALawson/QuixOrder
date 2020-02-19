@@ -11,8 +11,8 @@ Senior Project CECS491AB Restaurant Menu App
 ### Open the project
 1. Use your preferred IDE to open the maven file QuixOrder/demo/pom.xml
 2. Navigate to demo/src/main/resources. Right click on resources, and create a new file **application.yml** <br/>
-    **Note: {password} is a placeholder. Enter your own without the { }**
-    ####**`application.yml`**
+    **Note: {password} is a placeholder. Enter your own without the { }** <br/>
+    **`application.yml`**
     ```yaml
     app:
       datasource:

@@ -22,4 +22,4 @@ Senior Project CECS491AB Restaurant Menu App
         pool-size: 30
     ```
 3. Start the application `DemoApplication.java`
-4. The quixorder database in pgAdmin 4 should now be updated with tables defined in the sql files in resources/db/migration.
+4. The quixorder database in pgAdmin 4 should now be updated with tables defined in the sql files in resources/db/migration
